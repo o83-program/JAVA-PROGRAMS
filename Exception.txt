@@ -1,0 +1,77 @@
+import java.util.Scanner;
+class FatherAgeException extends Exception
+{
+public String toString()
+{
+return("fathers age is less than zero");
+}
+}
+class SonAgeException extends Exception
+{
+int a;
+SonAgeException(int age)
+{
+a=age;
+}
+public String toString()
+{
+if(a<0)
+return("sons age is less than zero");
+else
+return("sons age is more than fathers age");
+}
+}
+class Father
+{
+public int age2;
+Scanner scan=new Scanner(System.in);
+int age1;
+Father()
+{
+System.out.println("enter fathers age:");
+age1=scan.nextInt();
+}
+void ex1() throws FatherAgeException
+{
+if(age1<0)
+throw new FatherAgeException();
+}
+}
+class son extends Father
+{
+public int age2;
+son()
+{
+System.out.println("enter sons age:");
+age2=scan.nextInt();
+}
+void ex2() throws SonAgeException
+{
+if(age2<0||age2>super.age1)
+throw new SonAgeException(age2);
+}
+}
+class Relation
+{
+public static void main(String args[])
+{
+son s=new son();
+{
+try{
+s.ex1();
+}
+catch(FatherAgeException e)
+{
+System.out.println(e);
+}
+try
+{
+s.ex2();
+}
+catch(SonAgeException e)
+{
+System.out.println(e);
+}
+}
+}
+}
